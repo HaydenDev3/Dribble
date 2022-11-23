@@ -1,4 +1,4 @@
-import BaseCommand, { CommandConfigData } from "../../utils/BaseCommand"
+import BaseCommand, { CommandConfigData, CommandContext } from "../../utils/BaseCommand"
 import { ExtendedClient } from "../../utils/ExtendedClient"
 
 export default new class PingCommand implements BaseCommand {
@@ -7,7 +7,7 @@ export default new class PingCommand implements BaseCommand {
         description: ""
     }
 
-    execute = (...args: any[]) => {
-        
+    execute = (ctx: CommandContext, ...args: any[]) => {
+        console.log(ctx.message.guild)
     }
 }

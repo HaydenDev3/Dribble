@@ -20,14 +20,13 @@ export function registerCommands (mainPath: string) {
 
 export async function registerEvents (mainPath: string) {
     try {
-        const files = fs.readdirSync(`${mainPath}/events/`).filter(file => file.endsWith(".ts"));
-
-        for ( const file of files ) {
-            const pull = (await import(`../events/${file}`))?.default;
-            if ( !pull?.on ) return;
-
-            client.on(pull?.on as any, pull.invoke.bind(pull));
-        }
+        fs.readdirSync(`${mainPath}/events/`)
+            .filter(file => file.endsWith(".ts")).forEach(async file => {
+                const pull = (await import(`../events/${file}`))?.default;
+                if ( !pull?.on ) return;
+    
+                client.on(pull?.on as any, pull.invoke.bind(pull));
+            })
     } catch (err: any) {
         console.log(err.stack)
     }
