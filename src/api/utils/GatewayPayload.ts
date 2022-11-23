@@ -20,3 +20,8 @@ export const GatewayHeartbeat = {
     op: 1,
     d: null
 };
+
+export const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "",
+};
