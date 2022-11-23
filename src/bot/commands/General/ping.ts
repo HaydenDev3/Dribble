@@ -1,12 +1,13 @@
+import BaseCommand, { CommandConfigData } from "../../utils/BaseCommand"
 import { ExtendedClient } from "../../utils/ExtendedClient"
 
-export default {
-    config: {
+export default new class PingCommand implements BaseCommand {
+    config: CommandConfigData = {
         name: "ping",
-        description: "get the bot ping"
-    },
+        description: ""
+    }
 
-    async execute ({ client, message, args }: { client: ExtendedClient, message: any, args: string[] }) {
-        console.log(args);
-    },
+    execute = (...args: any[]) => {
+        
+    }
 }

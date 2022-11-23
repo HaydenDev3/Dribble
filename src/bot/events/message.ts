@@ -1,5 +1,5 @@
 export default {
-    on: "messageCreate",
+    on: "message",
 
     async invoke (message: any) {
         console.log(message)
