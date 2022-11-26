@@ -9,7 +9,8 @@ export default new (class ReadyHandler implements Event {
 
   async invoke(client: ExtendedClient) {
     Log.info(
-      `Hello world, a discord api handler made with love.\nTechnologies used:\n\b1. TypeScript\n\b2. Websockets`
+      process.env.READY_MESSAGE,
+      "BOT"
     );
     registerCommands(`${process.cwd()}/src/bot`);
   }
