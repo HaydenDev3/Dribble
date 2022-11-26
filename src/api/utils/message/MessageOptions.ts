@@ -1,7 +1,9 @@
+import { MessageEmbed } from "./embeds/MessageEmbed";
+
 export interface MessageOptions {
   content?: string;
   tts?: boolean;
-  embeds?: any[];
+  embeds?: APIEmbed[] | MessageEmbed[];
   components?: APIComponentRow[];
 }
 

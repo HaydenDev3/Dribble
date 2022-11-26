@@ -224,7 +224,7 @@ export async function buildMessage(client: Client, message_payload: APIGuildMess
     user,
     member
   );
-  const messageEmbeds: Array<MessageEmbed> = buildMessageEmbeds(embeds);
+  const messageEmbeds: Array<MessageEmbed | APIEmbed> = buildMessageEmbeds(embeds as any[]);
   message.embeds = messageEmbeds;
   return message;
 }
@@ -267,7 +267,7 @@ export function buildMessageInstance(
 }
 
 export function buildMessageEmbeds (embeds: Array<APIEmbed>) {
-  const msgEmbeds: Array<any> = [];
+  const msgEmbeds: Array<MessageEmbed> = [];
   for ( const embed of embeds ) {
     console.log(embed);
     msgEmbeds.push(
