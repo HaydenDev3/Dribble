@@ -1,4 +1,4 @@
-import { Client } from "../../";
+import { Client } from "../..";
 
 export default class User {
     constructor(

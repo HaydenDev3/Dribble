@@ -7,6 +7,12 @@ export default class Log {
         console.log(`[${this.getTime(new Date())}] INFO [${this.getSource(src)}] ${message}`);
     };
 
+
+    static error (err: any, src?: string) {
+        const message = err.stack || err || "Unknown Error"
+        console.log(`[${this.getTime(new Date())}] FAILED LAUNCH [${this.getSource(src)}] ${message}`);
+    };
+
     private static getTime (date: Date) {
         const hours = date.getHours();
         const minutes = date.getMinutes();

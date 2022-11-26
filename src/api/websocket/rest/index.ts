@@ -1,4 +1,4 @@
-import { Client } from "../../";
+import { Client } from "../..";
 import { headers } from "../../utils/GatewayPayload";
 import { Constants, EndPoints, StatusCode } from "../../utils/Constants";
 import { MessageOptions } from "../../utils/message/MessageOptions";
@@ -34,7 +34,7 @@ export default class RestAPIHandler {
             `${Constants.API_URL}/${EndPoints.GUILDS}/${id}/${EndPoints.CHANNELS}`,
             { headers }
         );
-        return response.data();
+        return response.data;
     }
 
     async fetchChannel(id: string) {
@@ -78,21 +78,21 @@ export default class RestAPIHandler {
     }
 
     async pinMessage(channelId: string, messageId: string): Promise<any> {
-        return fetch(
+        return await axios.put(
             `${Constants.API_URL}/${EndPoints.CHANNELS}/${channelId}/${EndPoints.PINS}/${messageId}`,
             { method: "PUT", headers }
         );
     }
 
     async unpinMessage(channelId: string, messageId: string): Promise<any> {
-        return axios.get(
+        return await axios.post(
             `${Constants.API_URL}/${EndPoints.CHANNELS}/${channelId}/${EndPoints.PINS}/${messageId}`,
             { method: "DELETE", headers }
         );
     }
 
     async createMessage(options: MessageOptions, id: string) {
-        const response = await axios.get(
+        const response = await axios.post(
             `${Constants.API_URL}/${EndPoints.CHANNELS}/${id}/${EndPoints.MESSAGES}`,
             {
                 method: "POST",
@@ -104,7 +104,7 @@ export default class RestAPIHandler {
     }
 
     async deleteMessage(channelId: string, messageId: string) {
-        return axios.get(
+        return await axios.post(
             `${Constants.API_URL}/${EndPoints.CHANNELS}/${channelId}/${EndPoints.MESSAGES}/${messageId}`,
             {
                 method: "DELETE",
@@ -118,7 +118,7 @@ export default class RestAPIHandler {
         channelId: string,
         messageId: string
     ) {
-        return axios.get(
+        return await axios.patch(
             `${Constants.API_URL}/${EndPoints.CHANNELS}/${channelId}/${EndPoints.MESSAGES}/${messageId}`,
             {
                 method: "PATCH",
@@ -132,7 +132,7 @@ export default class RestAPIHandler {
         channelId: string,
         messageId: string,
         emoji: any
-    ): Promise<Response> {
+    ) {
         const response = await axios.get(
             `${Constants.API_URL}/${EndPoints.CHANNELS}/${channelId}/${EndPoints.MESSAGES}/${messageId}/${EndPoints.REACTIONS}/${emoji}/@me`,
             {
@@ -140,11 +140,14 @@ export default class RestAPIHandler {
                 headers,
             }
         );
-        if (response.status === StatusCode.NO_CONTENT) return response as any;
-        throw new Error(response.statusText);
+        response.status ? new Error(response.statusText) : null;
+        if (response.status === StatusCode.NO_CONTENT) {
+            new Error(response.statusText)
+            return response as any;
+        }; 
     }
 
-    set token(token: string) {
+    set token (token: string) {
         this._token = token;
         headers.Authorization = `Bot ${this._token}`;
     }

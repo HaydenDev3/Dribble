@@ -9,6 +9,24 @@ import { GatewayPayload, headers } from "./utils/GatewayPayload";
 import { Message } from "./utils/message/Message";
 import GuildMember from "./utils/Guild/GuildMember";
 
+export interface ClientOptions {
+    presence: PresenceData;
+}
+
+export interface PresenceData {
+    activities: ActivityData[];
+    status?: ActivityType;
+    since?: Date;
+    afk: boolean;
+};
+
+export type ActivityType = "idle" | "dnd" | "online" | "offline";
+
+export interface ActivityData {
+    name: string;
+    type: number;
+}
+
 export interface ClientEvents {
     channelCreate: (channel: any) => void;
     channelUpdate: (oldChannel: any, newChannel: any) => void;
@@ -20,7 +38,7 @@ export interface ClientEvents {
     guildDelete: (guild: any) => void;
     ready: () => void;
     resumed: () => void;
-    message: (message: any | Message) => void;
+    message: (message: Message) => void;
     interaction: (interaction: any) => void;
     guildMemberAdd: (member: GuildMember) => void;
     messageReactionAdd: (reaction: any, user: any) => void;
@@ -34,6 +52,8 @@ export interface ClientEvents {
     autoModerationRuleDelete: (data: GatewayPayload) => void;
     autoModerationRuleUpdate: (oldData: any | GatewayPayload, newData: any | GatewayPayload) => void;
     autoModerationExecute: (data: GatewayPayload) => void;
+    typingStart: (data: GatewayPayload) => void;
+    presenceUpdate: (data: GatewayPayload) => void;
 }
 
 export declare interface Client {
@@ -62,10 +82,13 @@ export declare interface Client {
 export class Client extends EventEmitter {
     private websocket: WebSocketManager = new WebSocketManager(this);
     private token!: string;
+    public options?: ClientOptions;
 
-    constructor() {
+    constructor (options?: ClientOptions) {
         super();
         this.rest = new RestAPIHandler(this);
+
+        this.options = options;
 
         this.guilds = new Map();
         this.channels = new Map();
@@ -81,35 +104,5 @@ export class Client extends EventEmitter {
         } catch (err: any) {
             console.log(err.stack);
         }
-    }
-
-    public async createMessage(
-        content: MessageOptions | any,
-        channelId: string,
-        attachments?: any[]
-    ) {
-        try {
-            const response = await axios.post(
-                `${Constants.API_URL}/channels/${channelId}/messages`,
-                {
-                    method: "POST",
-                    headers,
-                    body: JSON.stringify(
-                        !content.components ?? !content.embeds
-                            ? {
-                                  content: content,
-                                  tts: false,
-                              }
-                            : {
-                                  embeds: content.embeds,
-                                  content: content,
-                                  components: content.components,
-                              }
-                    ),
-                }
-            );
-
-            return response.data();
-        } catch (err) {}
     }
 }

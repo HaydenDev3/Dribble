@@ -26,21 +26,13 @@ export default class WebSocketManager extends EventEmitter {
                 "op": 2,
                 "d": {
                     "token": token,
-                    "intents": 14023,
+                    "intents": 3276799,
                     "properties": {
                         "$os": "linux",
                         "$browser": "ajaJS",
                         "$device": "ajaJS",
                     },
-                    "presence": {
-                        "activities": [{
-                          "name": "Developed by www.unbreakable.dev",
-                          "type": 0
-                        }],
-                        "status": "dnd",
-                        "since": 91879201,
-                        "afk": false
-                    },
+                    ...this.client.options
                 },
             } as GatewayPayload;
 

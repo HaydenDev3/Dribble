@@ -1,5 +1,5 @@
 # Discord-API-Handler
-This project is commited for people to move away from Discord.js and start using this handler which is in the works.
+A simple project to help people move away from using third party libraries like Discord.js or Eris, etc; and start using this wonderful Discord Bot Handler.
 
 ## Credits & Contributing
 1. You can contribute to this project by messaging Unbreakablenight#0001 on Discord which should help you contribute to this stunning project.

@@ -1,6 +1,6 @@
 export enum Constants {
     GATEWAY_URL = "wss://gateway.discord.gg/v10",
-    API_URL = "https://discord.com/api?v=10&encoding=json",
+    API_URL = "https://discord.com/api?v=10",
 }
 
 export enum OPCODE {

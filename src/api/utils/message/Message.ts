@@ -1,7 +1,7 @@
 import Guild from "../Guild/Guild";
 import User from "../User/User";
 import GuildMember from "../Guild/GuildMember";
-import { Client } from "../../";
+import { Client } from "../..";
 import { BaseChannel } from "../channels/BaseChannel";
 
 export class Message {

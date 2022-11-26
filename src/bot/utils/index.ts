@@ -1,5 +1,11 @@
 import fs from 'fs';
 import { client } from '../app';
+import BaseCommand from './BaseCommand';
+
+export async function importFile (filePath: string): Promise<any> {
+    return (await import(filePath))?.default ||
+        await import(filePath)
+};
 
 export function registerCommands (mainPath: string) {
     try {
@@ -7,9 +13,11 @@ export function registerCommands (mainPath: string) {
             const commands = fs.readdirSync(`${mainPath}/commands/${dir}/`).filter(file => file.endsWith('.ts'));
 
             for ( const file of commands ) {
-                const pull = (await import(`../commands/${dir}/${file}`))?.default;
-                if ( !pull?.config?.name ) return;
+                const pull = await importFile(`../commands/${dir}/${file}`) as BaseCommand;
+                if ( !pull?.config?.name ) continue;
 
+                if ( pull?.config?.aliases && Array.isArray(pull.config.aliases) ) 
+                    pull.config.aliases.forEach(alias => client.aliases.set(alias, pull.config.name));
                 client.commands.set(pull.config.name as string, pull);
             }
         })

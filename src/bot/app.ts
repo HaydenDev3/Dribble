@@ -1,12 +1,18 @@
 import { config } from "dotenv";
-import { Client } from "../api";
-import { registerCommands, registerEvents } from "./utils";
-import { ExtendedClient } from "./utils/ExtendedClient";
 config({ path: '.env' });
+
+import { Client } from "../api";
+import { registerEvents } from "./utils";
+import { ExtendedClient } from "./utils/ExtendedClient";
+import mongoose from "mongoose";
+import Log from "./utils/Log";
 
 export const client = new ExtendedClient();
 
 registerEvents(__dirname);
-registerCommands(__dirname)
+
+mongoose.connect(process.env.MONGO_URI as string, {}, (err) => 
+    err ? Log.error(err) : Log.info(`Database Connection Established`)
+);
 
 client.connect(process.env.BOT_TOKEN as string);
