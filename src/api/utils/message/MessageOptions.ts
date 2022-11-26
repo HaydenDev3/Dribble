@@ -1,5 +1,3 @@
-import { MessageEmbed } from "./embeds/MessageEmbed";
-
 export interface MessageOptions {
   content?: string;
   tts?: boolean;
@@ -33,7 +31,7 @@ export interface APIEmbed {
   description: string;
   color: number;
   thumbnail: string | null;
-  image: string | null;
+  image:  APIEmbedImageData | null;
   author: APIEmbedAuthorData | null;
   footer: APIEmbedFooterData | null;
   type: "rich";
@@ -51,6 +49,13 @@ export interface APIEmbedFooterData {
   text: string;
   icon_url?: string | null;
   proxy_icon_url?: string | null;
+}
+
+export interface APIEmbedImageData {
+   url: string;
+   proxy_url?: string;
+   height?: number;
+   width?: number;
 }
 
 export enum ButtonStyle {
