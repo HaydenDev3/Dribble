@@ -5,14 +5,13 @@ import TextBasedChannel from "./TextBasedChannel";
 import { MessageOptions } from "../message/MessageOptions";
 import Collection from "../Collection";
 import { Message } from "../message/Message";
-import { buildMessage } from '../../utils/resolvers';
-import { MessageEmbed } from '../message/embeds/Embeds';
-import { BaseChannel } from './BaseChannel';
+import { buildMessage } from "../../utils/resolvers";
+import { MessageEmbed } from "../message/embeds/Embeds";
+import { BaseChannel } from "./BaseChannel";
 
 export class DMChannel extends BaseChannel {
+  _messages: Collection<string, Message> = new Collection();
 
-   _messages: Collection<string, Message> = new Collection();
-  
   constructor(
     _id: string,
     _client: Client,
@@ -20,12 +19,14 @@ export class DMChannel extends BaseChannel {
     _lastMessageId: string,
     _lastPinTimestamp: Date,
     _name: string,
-    _position: number,
+    _position: number
   ) {
     super(_client, _id, _name, _type);
   }
 
-  get messages(): Collection<string, Message> { return this._messages; }
+  get messages(): Collection<string, Message> {
+    return this._messages;
+  }
 
   async send(payload: string | MessageOptions | MessageEmbed) {
     if (typeof payload === "string") {

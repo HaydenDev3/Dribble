@@ -3,5 +3,5 @@ import ClientUser from "../../utils/Client/User";
 import { GatewayPayload } from "../../utils/GatewayPayload";
 
 export default function (client: Client, payload: GatewayPayload) {
-    client.emit("channelCreate", payload.d);
+  client.emit("channelCreate", payload.d);
 }

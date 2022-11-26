@@ -17,7 +17,7 @@ export class CategoryChannel extends GuildChannel {
     _guild: Guild,
     _permissionOverwrites: Array<any>,
     _nsfw: boolean,
-    _rateLimitPerUser: number,
+    _rateLimitPerUser: number
   ) {
     super(
       _id,
@@ -32,7 +32,7 @@ export class CategoryChannel extends GuildChannel {
       _guild,
       _permissionOverwrites,
       _nsfw,
-      _rateLimitPerUser,
+      _rateLimitPerUser
     );
   }
 }
