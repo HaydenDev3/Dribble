@@ -9,4 +9,5 @@ A simple project to help people move away from using third party libraries like 
 ## Environment Config Exampler.
 ```
     BOT_TOKEN="TOKEN FROM DISCORD DEVELOPER PORTAL"
+    MONGO_URI="MONGOOSE DATABASE URI"
 ```
