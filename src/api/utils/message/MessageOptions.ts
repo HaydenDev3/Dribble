@@ -1,7 +1,7 @@
 export interface MessageOptions {
   content?: string;
   tts?: boolean;
-  embeds?: APIEmbed[];
+  embeds?: APIEmbed[] | MessageEmbed[];
   components?: APIComponentRow[];
 }
 
