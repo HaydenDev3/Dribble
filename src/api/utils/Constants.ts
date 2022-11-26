@@ -1,8 +1,7 @@
 export enum Constants {
-    GATEWAY_URL = "wss://gateway.discord.gg/v10&encoding=json",
-    API_URL = "https://discord.com/api?v=10&encoding=json"
+    GATEWAY_URL = "wss://gateway.discord.gg/v10",
+    API_URL = "https://discord.com/api?v=10&encoding=json",
 }
-
 
 export enum OPCODE {
     ZERO = 0,
@@ -21,16 +20,16 @@ export enum OPCODE {
 }
 
 export enum EndPoints {
-    USERS = 'users',
-    USER_GUILDS = 'users/@me/guilds',
-    GUILDS = 'guilds',
-    CHANNELS = 'channels',
-    MESSAGES = 'messages',
-    MEMBERS = 'members',
-    REACTIONS = 'reactions',
-    PINS = 'pins',
+    USERS = "users",
+    USER_GUILDS = "users/@me/guilds",
+    GUILDS = "guilds",
+    CHANNELS = "channels",
+    MESSAGES = "messages",
+    MEMBERS = "members",
+    REACTIONS = "reactions",
+    PINS = "pins",
 }
-  
+
 export enum StatusCode {
     OK = 200,
     NO_CONTENT = 204,
@@ -40,9 +39,9 @@ export enum StatusCode {
 }
 
 export enum REGEX {
-    EMOJI_WITH_COLON = ':\\w+:\\d+',
-    GROUP_EMOJI_ID = '^:\\w+:(\\d+)$',
-    EMOJI_ID_ONLY = '^\\d+$',
-    GROUP_EMOJI_NAME = '^:(\\w+):\d+$',
-    GROUP_EMOJI = '^:(\\w+):(\\d+)$'
+    EMOJI_WITH_COLON = ":\\w+:\\d+",
+    GROUP_EMOJI_ID = "^:\\w+:(\\d+)$",
+    EMOJI_ID_ONLY = "^\\d+$",
+    GROUP_EMOJI_NAME = "^:(\\w+):d+$",
+    GROUP_EMOJI = "^:(\\w+):(\\d+)$",
 }

@@ -11,17 +11,17 @@ export const GatewayIdentifier = {
         properties: {
             $os: "linux",
             $browser: "chrome",
-            $device: "chrome"
-        }
-    }
-}
+            $device: "chrome",
+        },
+    },
+};
 
 export const GatewayHeartbeat = {
     op: 1,
-    d: null
+    d: null,
 };
 
 export const headers = {
     "Content-Type": "application/json",
-    "Authorization": "",
+    Authorization: "",
 };

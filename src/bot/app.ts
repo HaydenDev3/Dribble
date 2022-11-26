@@ -9,4 +9,4 @@ export const client = new ExtendedClient();
 registerEvents(__dirname);
 registerCommands(__dirname)
 
-client.connect(process.env.BOT_TOKEN as string)
+client.connect(process.env.BOT_TOKEN as string);
