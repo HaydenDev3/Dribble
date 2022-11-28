@@ -9,11 +9,11 @@ export class ExtendedClient extends Client {
       presence: {
         activities: [
           {
-            name: "Developed by www.unbreakable.dev",
-            type: PresenceType.Watching,
+            name: process.env.STATUS_MESSAGE,
+            type: PresenceType.Playing,
           },
         ],
-        status: "idle",
+        status: "online",
         since: new Date(),
         afk: true,
       },

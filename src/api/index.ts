@@ -1,11 +1,7 @@
-import axios from "axios";
 import EventEmitter from "events";
-import WebSocket from "ws";
 import RestAPIHandler from "./websocket/rest";
-import { Constants } from "./utils/Constants";
-import { MessageOptions } from "./utils/message/MessageOptions";
 import WebSocketManager from "./websocket/index";
-import { GatewayPayload, headers } from "./utils/GatewayPayload";
+import { GatewayPayload } from "./utils/GatewayPayload";
 import { Message } from "./utils/message/Message";
 import GuildMember from "./utils/Guild/GuildMember";
 
