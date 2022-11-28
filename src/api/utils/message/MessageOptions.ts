@@ -1,7 +1,9 @@
+import { Color } from "../Constants";
+
 export interface MessageOptions {
   content?: string;
   tts?: boolean;
-  embeds?: APIEmbed[] | MessageEmbed[];
+  embeds?: any[];
   components?: APIComponentRow[];
 }
 
@@ -27,16 +29,16 @@ export interface SelectMenuOption {
 }
 
 export interface APIEmbed {
-  title: string;
-  description: string;
-  color: number;
-  thumbnail: string | null;
-  image:  APIEmbedImageData | null;
-  author: APIEmbedAuthorData | null;
-  footer: APIEmbedFooterData | null;
-  type: "rich";
-  timestamp: Date;
-  url: string;
+  title?: string;
+  description?: string;
+  color?: Color | number | string;
+  thumbnail?: APIEmbedThumbnailData | null;
+  image?: APIEmbedImageData | null;
+  author?: APIEmbedAuthorData | null;
+  footer?: APIEmbedFooterData | null;
+  type?: "rich" | APIEmbedType | string;
+  timestamp?: Date | string;
+  url?: string;
 };
 
 export interface APIEmbedAuthorData {
@@ -52,10 +54,17 @@ export interface APIEmbedFooterData {
 }
 
 export interface APIEmbedImageData {
-   url: string;
-   proxy_url?: string;
-   height?: number;
-   width?: number;
+  url: string;
+  proxy_url?: string;
+  height?: number;
+  width?: number
+}
+
+export interface APIEmbedThumbnailData {
+  url: string;
+  proxy_url?: string;
+  height?: number;
+  width?: number;
 }
 
 export enum ButtonStyle {
@@ -72,4 +81,16 @@ export enum ComponentType {
 export interface MessageDeleteOptions {
   timeout?: number;
   reason?: string;
+}
+
+/**
+ * @deprecated https://discord.com/developers/docs/resources/channel#embed-object-embed-types
+ */
+export enum APIEmbedType {
+  RICH = 'rich',
+  IMAGE = 'image',
+  VIDEO = 'video',
+  GIF = 'gifv',
+  ARTICLE = 'article',
+  LINK = 'link'
 }

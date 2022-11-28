@@ -188,14 +188,19 @@ export function buildTextChannel(client: Client, guild: Guild, c: any) {
 }
 
 export async function buildMessage(client: Client, message_payload: APIGuildMessagePayload) {
-  const { channel_id, guild_id, author, embeds, components } = message_payload;
+  const {
+    channel_id,
+    guild_id,
+    author,
+    embeds,
+    components } = message_payload;
   var channel = client.channels.get(channel_id);
   var guild: Guild = client.guilds.get(guild_id);
   var user: User = client.users.get(author?.id);
-  if ( !channel ) channel = await client.rest.fetchChannel(channel_id);
+  if (!channel) channel = await client.rest.fetchChannel(channel_id);
 
   const type: ChannelType = getChannelType(channel.type);
-  if ( !guild ) {
+  if (!guild) {
     const now = performance.now();
     guild = await client.rest.fetchGuild(guild_id) as any;
     const end = performance.now();
@@ -205,7 +210,7 @@ export async function buildMessage(client: Client, message_payload: APIGuildMess
     );
   }
 
-  if ( !user ) {
+  if (!user) {
     const now = performance.now();
     user = await client.rest.fetchUser(author?.id) as any;
     const end = performance.now();
@@ -224,7 +229,7 @@ export async function buildMessage(client: Client, message_payload: APIGuildMess
     user,
     member
   );
-  const messageEmbeds: Array<MessageEmbed | APIEmbed> = buildMessageEmbeds(embeds as any[]);
+  const messageEmbeds: Array<MessageEmbed> = buildMessageEmbeds(embeds);
   message.embeds = messageEmbeds;
   return message;
 }
@@ -266,18 +271,22 @@ export function buildMessageInstance(
   );
 }
 
-export function buildMessageEmbeds (embeds: Array<APIEmbed>) {
-  const msgEmbeds: Array<MessageEmbed> = [];
-  for ( const embed of embeds ) {
+export function buildMessageEmbeds(embeds: Array<APIEmbed>) {
+  const msgEmbeds: Array<any> = [];
+  for (const embed of embeds) {
     console.log(embed);
     msgEmbeds.push(
       new MessageEmbed(
         embed.title,
-        embed.type,
         embed.description,
-        embed.url,
+        embed.color,
+        embed.thumbnail,
+        embed.image,
+        embed.author,
+        embed.footer,
+        embed.type,
         embed.timestamp,
-        embed.color
+        embed.url
       )
     );
   }

@@ -45,3 +45,13 @@ export enum REGEX {
   GROUP_EMOJI_NAME = "^:(\\w+):d+$",
   GROUP_EMOJI = "^:(\\w+):(\\d+)$",
 }
+
+export enum Color {
+  BLUE = 0x0000FF,
+  RED = 0xFF0000,
+  GREEN = 0x00FF00,
+  YELLOW = 0xFFFF00,
+  ORANGE = 0xFFA500,
+  TEAL = 0x008080,
+  MAGENTA = 0xFF00FF,
+}
