@@ -1,46 +1,29 @@
-import { Guild } from "discord.js";
+import { ApplicationCommandDataResolvable, Guild } from "discord.js";
 import fs from "fs";
 import { client } from "../app";
 import BaseCommand from "./BaseCommand";
+import Log from "./Log";
 
 export async function importFile(filePath: string): Promise<any> {
   return (await import(filePath))?.default;
 }
 
-export function registerCommands(mainPath: string) {
+export async function registerCommands(mainPath: string) {
   try {
-    const commandsArray: Array<BaseCommand> = [];
-
     fs.readdirSync(`${mainPath}/commands/`).forEach(async (dir) => {
-      const commands = fs
-        .readdirSync(`${mainPath}/commands/${dir}/`)
-        .filter((file) => file.endsWith(".ts"));
+      const commands = fs.readdirSync(`${mainPath}/commands/${dir}/`)
+        .filter((file) => file.endsWith(".ts")) as string[];
 
       for (const file of commands) {
-        const pull = (await importFile(
-          `../commands/${dir}/${file}`
-        )) as BaseCommand;
-        if ( !pull?.data ) continue;
+        const pull = (await import(`../commands/${dir}/${file}`))?.default as BaseCommand;
+        if ( !pull?.data ) return;
 
-        client.commands.set(pull.data?.name as any, pull);
-        commandsArray.push(pull.data);
+        client.commandsArray.push(pull.data as ApplicationCommandDataResolvable);
+        client.commands.set(pull.data?.name as string, pull);
       }
     });
-
-    client.on('ready', () => {
-      const guildId = process.env.GUILD_ID;
-      let guild: Guild;
-
-      if ( guildId ) {
-        guild = client.guilds.cache.get(guildId) as Guild;
-
-        guild.commands.set(commandsArray as any);
-      } else {
-        client.application?.commands.set(commandsArray as any);
-      };
-    })
   } catch (err: any) {
-    console.log(err.stack);
+    Log.error(err, 'util');
   }
 }
 

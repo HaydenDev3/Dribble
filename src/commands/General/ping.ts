@@ -9,7 +9,7 @@ export default new (class PingCommand implements BaseCommand {
     .setName(`ping`)
     .setDescription("The best command ever created!")
 
-  execute = async (ctx: CommandContext, ...args: any[]) => {
+  execute = async (ctx: CommandContext) => {
     try {
       await ctx.channel.send({
         embeds: [
