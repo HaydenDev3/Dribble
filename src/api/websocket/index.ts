@@ -11,7 +11,7 @@ import {
 export default class WebSocketManager extends EventEmitter {
   public token!: string;
   private websocket: WebSocket;
-  protected payload: GatewayPayload;
+  protected payload!: GatewayPayload;
   protected interval: any;
 
   constructor(private client: Client) {

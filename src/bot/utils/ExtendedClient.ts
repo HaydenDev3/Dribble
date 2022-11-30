@@ -1,3 +1,4 @@
+import { registerEvents } from ".";
 import { Client, PresenceType } from "../../api";
 
 export class ExtendedClient extends Client {
@@ -9,7 +10,7 @@ export class ExtendedClient extends Client {
       presence: {
         activities: [
           {
-            name: process.env.STATUS_MESSAGE,
+            name: `/help To spawn some help!`,
             type: PresenceType.Playing,
           },
         ],
@@ -18,5 +19,10 @@ export class ExtendedClient extends Client {
         afk: true,
       },
     });
+  }
+
+  public async init (token: string) {
+    this.connect(token);
+    await registerEvents(`${process.cwd()}/src/bot`);
   }
 }

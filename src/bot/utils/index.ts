@@ -3,7 +3,7 @@ import { client } from "../app";
 import BaseCommand from "./BaseCommand";
 
 export async function importFile(filePath: string): Promise<any> {
-  return (await import(filePath))?.default || (await import(filePath));
+  return (await import(filePath))?.default;
 }
 
 export function registerCommands(mainPath: string) {

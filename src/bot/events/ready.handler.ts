@@ -8,10 +8,7 @@ export default new (class ReadyHandler implements Event {
   on: keyof ClientEvents = "ready";
 
   async invoke(client: ExtendedClient) {
-    Log.info(
-      process.env.READY_MESSAGE,
-      "BOT"
-    );
-    registerCommands(`${process.cwd()}/src/bot`);
+    Log.info(process.env.READY_MESSAGE, "BOT");
+    await registerCommands(`${process.cwd()}/src/bot`);
   }
 })();

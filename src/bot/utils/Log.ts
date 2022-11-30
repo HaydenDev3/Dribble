@@ -5,7 +5,7 @@ export default class Log {
 
   static info(message: string, src?: string) {
     console.log(
-      `[${this.getTime(new Date())}] INFO [${this.getSource(src)}] ${message}`
+      `[${this.getTime(new Date())}] INFO [${this.getSource(src)}] ${message}`.green.bold
     );
   }
 
@@ -14,7 +14,16 @@ export default class Log {
     console.log(
       `[${this.getTime(new Date())}] FAILED LAUNCH [${this.getSource(
         src
-      )}] ${message}`
+      )}] ${message}`.bgRed.grey
+    );
+  }
+
+  static warn(err: any, src?: string) {
+    const message = err.stack || err || "Unknown Error";
+    console.log(
+      `[${this.getTime(new Date())}] WARNING [${this.getSource(
+        src
+      )}] ${message}`.yellow.dim
     );
   }
 
