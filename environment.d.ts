@@ -5,6 +5,7 @@ declare global {
         MONGO_URI: string;
         READY_MESSAGE: string;
         STATUS_MESSAGE: string;
+        GUILD_ID?: string;
       }
     }
 }

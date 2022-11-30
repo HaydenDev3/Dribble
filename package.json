@@ -1,39 +1,38 @@
 {
-  "name": "discord-api-handler",
+  "name": "@dribble/core",
   "version": "1.0.0",
   "description": "A simple project to help people move away from using third party libraries like Discord.js or Eris, etc; and start using this wonderful Discord Bot Handler.",
   "main": "src/bot/app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn --transpile-only ./src/bot/app.ts",
-    "start": "ts-node --respawn --transpile-only ./src/bot/app.ts"
+    "dev": "ts-node-dev --respawn --transpile-only ./src/app.ts",
+    "start": "ts-node --respawn --transpile-only ./src/app.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Unbreakablenight/Discord-API-Handler.git"
+    "url": "git+https://github.com/Unbreakablenight/Dribble.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Unbreakablenight/Discord-API-Handler/issues"
+    "url": "https://github.com/Unbreakablenight/Dribble/issues"
   },
-  "homepage": "https://github.com/Unbreakablenight/Discord-API-Handler#readme",
+  "homepage": "https://github.com/Unbreakablenight/Dribble#readme",
   "dependencies": {
     "axios": "^1.2.0",
     "colors": "^1.4.0",
+    "discord.js": "^14.7.0",
     "events": "^3.3.0",
     "mongoose": "^6.7.3",
     "node-fetch": "^2.6.7",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.3",
-    "ws": "^8.11.0"
+    "typescript": "^4.9.3"
   },
   "devDependencies": {
     "@types/mongoose": "^5.11.97",
     "@types/node": "^18.11.9",
     "@types/node-fetch": "^2.6.2",
-    "@types/ws": "^8.5.3",
     "dotenv": "^16.0.3",
     "ts-node-dev": "^2.0.0"
   }
